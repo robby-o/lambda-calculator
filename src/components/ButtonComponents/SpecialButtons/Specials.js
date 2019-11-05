@@ -1,11 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import SpecialButton from './SpecialButton';
 
 const Specials = props => {
   return (
     <div className='specials'>
       {props.special.map((special, index) => (
-        <SpecialButton key={index} button={special} />
+        <SpecialButton
+          updateDisplay={props.updateDisplay}
+          key={index}
+          button={special}
+        />
       ))}
     </div>
   );

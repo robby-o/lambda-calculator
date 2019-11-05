@@ -1,11 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import NumberButton from './NumberButton';
 
 const Numbers = props => {
   return (
     <div className='numbers'>
       {props.number.map((number, index) => (
-        <NumberButton key={index} button={number} />
+        <NumberButton
+          updateDisplay={props.updateDisplay}
+          key={index}
+          button={number}
+        />
       ))}
     </div>
   );

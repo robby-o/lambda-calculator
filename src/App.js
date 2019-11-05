@@ -16,6 +16,14 @@ function App() {
   const [numberState] = useState(numbers);
   const [specialState] = useState(specials);
   const [operatorState] = useState(operators);
+
+  const updateDisplay = x => {
+    setDisplayState(x);
+  };
+
+  // const changeNumber = () => {
+  //   setCount(count => count + 1);
+  // };
   // STEP 5 - After you get the components displaying using the provided data file, write your state hooks here.
   // Once the state hooks are in place write some functions to hold data in state and update that data depending on what it needs to be doing
   // Your functions should accept a parameter of the the item data being displayed to the DOM (ie - should recieve 5 if the user clicks on
@@ -29,11 +37,11 @@ function App() {
         <Display displayValue={displayState} />
         <div className='buttons'>
           <div className='left'>
-            <Specials special={specialState} />
-            <Numbers number={numberState} />
+            <Specials updateDisplay={updateDisplay} special={specialState} />
+            <Numbers updateDisplay={updateDisplay} number={numberState} />
           </div>
           <div className='right'>
-            <Operators operator={operatorState} />
+            <Operators updateDisplay={updateDisplay} operator={operatorState} />
           </div>
         </div>
       </div>
