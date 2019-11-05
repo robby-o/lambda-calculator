@@ -19,12 +19,15 @@ function App() {
 
   const updateDisplay = x => {
     let display = displayState;
+    if (display.length > 9) {
+      return displayState;
+    }
     if (displayState === 0) {
       display = x;
     } else {
       display += x;
     }
-    console.log(display);
+    console.log(display.length);
     setDisplayState(display);
   };
 
