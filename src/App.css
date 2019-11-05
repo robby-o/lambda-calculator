@@ -69,6 +69,10 @@
   box-shadow: 0 4px black;
   border: none;
 }
+.button:active {
+  box-shadow: 0 5px black;
+  transform: translateY(4px);
+}
 
 .special_button {
   background-color: #2061b0;
