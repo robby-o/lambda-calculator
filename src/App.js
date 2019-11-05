@@ -19,7 +19,11 @@ function App() {
 
   const updateDisplay = x => {
     let display = [displayState];
-    display.push(x);
+    if (display[0] === 0) {
+      display[0] = x;
+    } else {
+      display.push(x);
+    }
     console.log(display);
     setDisplayState(display);
   };
