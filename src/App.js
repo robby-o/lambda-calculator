@@ -27,7 +27,10 @@ function App() {
     } else {
       display += x;
     }
-    console.log(display.length);
+    if (x === 'C') {
+      display = 0;
+    }
+    console.log(display);
     setDisplayState(display);
   };
 
