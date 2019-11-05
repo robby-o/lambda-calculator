@@ -18,11 +18,11 @@ function App() {
   const [operatorState] = useState(operators);
 
   const updateDisplay = x => {
-    let display = [displayState];
-    if (display[0] === 0) {
-      display[0] = x;
+    let display = displayState;
+    if (displayState === 0) {
+      display = x;
     } else {
-      display.push(x);
+      display += x;
     }
     console.log(display);
     setDisplayState(display);
