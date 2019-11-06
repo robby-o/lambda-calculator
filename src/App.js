@@ -58,7 +58,7 @@ function App() {
       function evalString(display) {
         return new Function('return ' + display)();
       }
-      display = evalString(displayState);
+      display = String(evalString(displayState)).slice(0, 9);
     }
     console.log(display);
     setDisplayState(display);
