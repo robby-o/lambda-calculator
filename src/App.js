@@ -22,7 +22,11 @@ function App() {
 
     // prevents number overflow
     if (display.length > 9) {
-      return displayState;
+      if (x === 'C') {
+        display = 0;
+      } else {
+        return displayState;
+      }
     }
 
     // removes leading zero
