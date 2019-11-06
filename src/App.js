@@ -31,8 +31,13 @@ function App() {
 
       // prepends a '-' to display
     } else if (x === '+/-') {
-      x = '-';
-      display = x + display;
+      // removes '-' if it's already there.
+      if (display.charAt(0) === '-') {
+        display = display.slice(1);
+      } else {
+        x = '-';
+        display = x + display;
+      }
     } else {
       display += x;
     }
