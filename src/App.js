@@ -1,23 +1,83 @@
-import React from "react";
-import "./App.css";
-// STEP 4 - import the button and display components
-// Don't forget to import any extra css/scss files you build into the correct component
+import React, { useState } from 'react';
+import './App.css';
 
-// Logo has already been provided for you. Do the same for the remaining components
-import Logo from "./components/DisplayComponents/Logo";
+import Logo from './components/DisplayComponents/Logo';
+import Display from './components/DisplayComponents/Display';
+import Numbers from './components/ButtonComponents/NumberButtons/Numbers';
+import Operators from './components/ButtonComponents/OperatorButtons/Operators';
+import Specials from './components/ButtonComponents/SpecialButtons/Specials';
+
+import { numbers } from './data';
+import { specials } from './data';
+import { operators } from './data';
 
 function App() {
-  // STEP 5 - After you get the components displaying using the provided data file, write your state hooks here.
-  // Once the state hooks are in place write some functions to hold data in state and update that data depending on what it needs to be doing
-  // Your functions should accept a parameter of the the item data being displayed to the DOM (ie - should recieve 5 if the user clicks on
-  // the "5" button, or the operator if they click one of those buttons) and then call your setter function to update state.
-  // Don't forget to pass the functions (and any additional data needed) to the components as props
+  const [displayState, setDisplayState] = useState(0);
+  const [numberState] = useState(numbers);
+  const [specialState] = useState(specials);
+  const [operatorState] = useState(operators);
+
+  const updateDisplay = x => {
+    let display = displayState;
+
+    // prevents number overflow
+    if (display.length > 9) {
+      if (x === 'C') {
+        display = 0;
+      } else {
+        return displayState;
+      }
+    }
+
+    // removes leading zero
+    if (displayState === 0) {
+      display = x;
+
+      // prepends a '-' to display
+    } else if (x === '+/-') {
+      // need to reconvert to a string to have a string[i]
+      display = String(display);
+      // removes '-' if it's already there.
+      if (display.charAt() === '-') {
+        display = display.slice(1);
+      } else {
+        x = '-';
+        display = x + display;
+      }
+    } else {
+      display += x;
+    }
+
+    // enables 'Clear' button
+    if (x === 'C') {
+      display = 0;
+    }
+
+    // evaluation
+    if (x === '=') {
+      function evalString(display) {
+        return new Function('return ' + display)();
+      }
+      display = String(evalString(displayState)).slice(0, 9);
+    }
+    console.log(display);
+    setDisplayState(display);
+  };
 
   return (
-    <div className="container">
+    <div className='container'>
       <Logo />
-      <div className="App">
-        {/* STEP 4 - Render your components here and be sure to properly import/export all files */}
+      <div className='App'>
+        <Display displayValue={displayState} />
+        <div className='buttons'>
+          <div className='left'>
+            <Specials updateDisplay={updateDisplay} special={specialState} />
+            <Numbers updateDisplay={updateDisplay} number={numberState} />
+          </div>
+          <div className='right'>
+            <Operators updateDisplay={updateDisplay} operator={operatorState} />
+          </div>
+        </div>
       </div>
     </div>
   );
