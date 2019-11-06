@@ -19,17 +19,30 @@ function App() {
 
   const updateDisplay = x => {
     let display = displayState;
+
+    // prevents number overflow
     if (display.length > 9) {
       return displayState;
     }
+
+    // removes leading zero
     if (displayState === 0) {
       display = x;
+
+      // prepends a '-' to display
+    } else if (x === '+/-') {
+      x = '-';
+      display = x + display;
     } else {
       display += x;
     }
+
+    // enables 'Clear' button
     if (x === 'C') {
       display = 0;
     }
+
+    // evaluation
     if (x === '=') {
       function evalString(display) {
         return new Function('return ' + display)();
