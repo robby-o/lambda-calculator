@@ -31,8 +31,10 @@ function App() {
 
       // prepends a '-' to display
     } else if (x === '+/-') {
+      // need to reconvert to a string to have a string[i]
+      display = String(display);
       // removes '-' if it's already there.
-      if (display.charAt(0) === '-') {
+      if (display.charAt() === '-') {
         display = display.slice(1);
       } else {
         x = '-';
